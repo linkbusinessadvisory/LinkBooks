@@ -101,7 +101,7 @@ function Dashboard() {
                       {row.date}
                     </TableCell>
                     <TableCell>
-                      <StatusBadge status={statuses[i]} />
+                      <StatusBadge status={statuses[i] ?? "Draft"} />
                     </TableCell>
                     <TableCell className="numeric text-right">{row.amount}</TableCell>
                   </TableRow>
