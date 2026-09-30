@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const Route = createFileRoute("/accounting")({
+export const Route = createFileRoute("/_authenticated/accounting")({
   head: () => ({
     meta: [
       { title: "Accounting — LinkBooks" },

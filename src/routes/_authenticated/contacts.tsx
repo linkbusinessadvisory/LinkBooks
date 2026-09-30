@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const Route = createFileRoute("/contacts")({
+export const Route = createFileRoute("/_authenticated/contacts")({
   head: () => ({
     meta: [
       { title: "Contacts — LinkBooks" },

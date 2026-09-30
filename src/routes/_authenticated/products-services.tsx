@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const Route = createFileRoute("/products-services")({
+export const Route = createFileRoute("/_authenticated/products-services")({
   head: () => ({
     meta: [
       { title: "Products & Services — LinkBooks" },
