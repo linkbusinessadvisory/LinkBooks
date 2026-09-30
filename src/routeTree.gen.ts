@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountingRouteImport } from './routes/accounting'
+import { Route as AiAssistantRouteImport } from './routes/ai-assistant'
 import { Route as BankingRouteImport } from './routes/banking'
 import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as ProductsServicesRouteImport } from './routes/products-services'
 import { Route as PurchasesRouteImport } from './routes/purchases'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SalesRouteImport } from './routes/sales'
+import { Route as SettingsRouteImport } from './routes/settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,6 +31,11 @@ const AccountingRoute = AccountingRouteImport.update({
   path: '/accounting',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAssistantRoute = AiAssistantRouteImport.update({
+  id: '/ai-assistant',
+  path: '/ai-assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BankingRoute = BankingRouteImport.update({
   id: '/banking',
   path: '/banking',
@@ -36,6 +44,11 @@ const BankingRoute = BankingRouteImport.update({
 const ContactsRoute = ContactsRouteImport.update({
   id: '/contacts',
   path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsServicesRoute = ProductsServicesRouteImport.update({
@@ -58,80 +71,106 @@ const SalesRoute = SalesRouteImport.update({
   path: '/sales',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accounting': typeof AccountingRoute
+  '/ai-assistant': typeof AiAssistantRoute
   '/banking': typeof BankingRoute
   '/contacts': typeof ContactsRoute
+  '/help': typeof HelpRoute
   '/products-services': typeof ProductsServicesRoute
   '/purchases': typeof PurchasesRoute
   '/reports': typeof ReportsRoute
   '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accounting': typeof AccountingRoute
+  '/ai-assistant': typeof AiAssistantRoute
   '/banking': typeof BankingRoute
   '/contacts': typeof ContactsRoute
+  '/help': typeof HelpRoute
   '/products-services': typeof ProductsServicesRoute
   '/purchases': typeof PurchasesRoute
   '/reports': typeof ReportsRoute
   '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accounting': typeof AccountingRoute
+  '/ai-assistant': typeof AiAssistantRoute
   '/banking': typeof BankingRoute
   '/contacts': typeof ContactsRoute
+  '/help': typeof HelpRoute
   '/products-services': typeof ProductsServicesRoute
   '/purchases': typeof PurchasesRoute
   '/reports': typeof ReportsRoute
   '/sales': typeof SalesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/accounting'
+    | '/ai-assistant'
     | '/banking'
     | '/contacts'
+    | '/help'
     | '/products-services'
     | '/purchases'
     | '/reports'
     | '/sales'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/accounting'
+    | '/ai-assistant'
     | '/banking'
     | '/contacts'
+    | '/help'
     | '/products-services'
     | '/purchases'
     | '/reports'
     | '/sales'
+    | '/settings'
   id:
     | '__root__'
     | '/'
     | '/accounting'
+    | '/ai-assistant'
     | '/banking'
     | '/contacts'
+    | '/help'
     | '/products-services'
     | '/purchases'
     | '/reports'
     | '/sales'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountingRoute: typeof AccountingRoute
+  AiAssistantRoute: typeof AiAssistantRoute
   BankingRoute: typeof BankingRoute
   ContactsRoute: typeof ContactsRoute
+  HelpRoute: typeof HelpRoute
   ProductsServicesRoute: typeof ProductsServicesRoute
   PurchasesRoute: typeof PurchasesRoute
   ReportsRoute: typeof ReportsRoute
   SalesRoute: typeof SalesRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccountingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-assistant': {
+      id: '/ai-assistant'
+      path: '/ai-assistant'
+      fullPath: '/ai-assistant'
+      preLoaderRoute: typeof AiAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/banking': {
       id: '/banking'
       path: '/banking'
@@ -162,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/contacts'
       fullPath: '/contacts'
       preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products-services': {
@@ -192,18 +245,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountingRoute: AccountingRoute,
+  AiAssistantRoute: AiAssistantRoute,
   BankingRoute: BankingRoute,
   ContactsRoute: ContactsRoute,
+  HelpRoute: HelpRoute,
   ProductsServicesRoute: ProductsServicesRoute,
   PurchasesRoute: PurchasesRoute,
   ReportsRoute: ReportsRoute,
   SalesRoute: SalesRoute,
+  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
