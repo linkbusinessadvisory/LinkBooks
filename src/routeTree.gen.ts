@@ -9,118 +9,119 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AccountingRouteImport } from './routes/accounting'
-import { Route as AiAssistantRouteImport } from './routes/ai-assistant'
-import { Route as BankingRouteImport } from './routes/banking'
-import { Route as ContactsRouteImport } from './routes/contacts'
-import { Route as HelpRouteImport } from './routes/help'
-import { Route as ProductsServicesRouteImport } from './routes/products-services'
-import { Route as PurchasesRouteImport } from './routes/purchases'
-import { Route as ReportsRouteImport } from './routes/reports'
-import { Route as SalesRouteImport } from './routes/sales'
-import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedAccountingRouteImport } from './routes/_authenticated/accounting'
+import { Route as AuthenticatedAiAssistantRouteImport } from './routes/_authenticated/ai-assistant'
+import { Route as AuthenticatedBankingRouteImport } from './routes/_authenticated/banking'
+import { Route as AuthenticatedContactsRouteImport } from './routes/_authenticated/contacts'
+import { Route as AuthenticatedHelpRouteImport } from './routes/_authenticated/help'
+import { Route as AuthenticatedProductsServicesRouteImport } from './routes/_authenticated/products-services'
+import { Route as AuthenticatedPurchasesRouteImport } from './routes/_authenticated/purchases'
+import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
+import { Route as AuthenticatedSalesRouteImport } from './routes/_authenticated/sales'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/_authenticated/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AccountingRoute = AccountingRouteImport.update({
-  id: '/accounting',
+const AuthenticatedAccountingRoute = AuthenticatedAccountingRouteImport.update({
+  id: '/_authenticated/accounting',
   path: '/accounting',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AiAssistantRoute = AiAssistantRouteImport.update({
-  id: '/ai-assistant',
-  path: '/ai-assistant',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BankingRoute = BankingRouteImport.update({
-  id: '/banking',
+const AuthenticatedAiAssistantRoute =
+  AuthenticatedAiAssistantRouteImport.update({
+    id: '/_authenticated/ai-assistant',
+    path: '/ai-assistant',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedBankingRoute = AuthenticatedBankingRouteImport.update({
+  id: '/_authenticated/banking',
   path: '/banking',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactsRoute = ContactsRouteImport.update({
-  id: '/contacts',
+const AuthenticatedContactsRoute = AuthenticatedContactsRouteImport.update({
+  id: '/_authenticated/contacts',
   path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HelpRoute = HelpRouteImport.update({
-  id: '/help',
+const AuthenticatedHelpRoute = AuthenticatedHelpRouteImport.update({
+  id: '/_authenticated/help',
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsServicesRoute = ProductsServicesRouteImport.update({
-  id: '/products-services',
-  path: '/products-services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PurchasesRoute = PurchasesRouteImport.update({
-  id: '/purchases',
+const AuthenticatedProductsServicesRoute =
+  AuthenticatedProductsServicesRouteImport.update({
+    id: '/_authenticated/products-services',
+    path: '/products-services',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedPurchasesRoute = AuthenticatedPurchasesRouteImport.update({
+  id: '/_authenticated/purchases',
   path: '/purchases',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReportsRoute = ReportsRouteImport.update({
-  id: '/reports',
+const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
+  id: '/_authenticated/reports',
   path: '/reports',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SalesRoute = SalesRouteImport.update({
-  id: '/sales',
+const AuthenticatedSalesRoute = AuthenticatedSalesRouteImport.update({
+  id: '/_authenticated/sales',
   path: '/sales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/_authenticated/settings',
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/accounting': typeof AccountingRoute
-  '/ai-assistant': typeof AiAssistantRoute
-  '/banking': typeof BankingRoute
-  '/contacts': typeof ContactsRoute
-  '/help': typeof HelpRoute
-  '/products-services': typeof ProductsServicesRoute
-  '/purchases': typeof PurchasesRoute
-  '/reports': typeof ReportsRoute
-  '/sales': typeof SalesRoute
-  '/settings': typeof SettingsRoute
+  '/accounting': typeof AuthenticatedAccountingRoute
+  '/ai-assistant': typeof AuthenticatedAiAssistantRoute
+  '/banking': typeof AuthenticatedBankingRoute
+  '/contacts': typeof AuthenticatedContactsRoute
+  '/help': typeof AuthenticatedHelpRoute
+  '/products-services': typeof AuthenticatedProductsServicesRoute
+  '/purchases': typeof AuthenticatedPurchasesRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/sales': typeof AuthenticatedSalesRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/accounting': typeof AccountingRoute
-  '/ai-assistant': typeof AiAssistantRoute
-  '/banking': typeof BankingRoute
-  '/contacts': typeof ContactsRoute
-  '/help': typeof HelpRoute
-  '/products-services': typeof ProductsServicesRoute
-  '/purchases': typeof PurchasesRoute
-  '/reports': typeof ReportsRoute
-  '/sales': typeof SalesRoute
-  '/settings': typeof SettingsRoute
+  '/accounting': typeof AuthenticatedAccountingRoute
+  '/ai-assistant': typeof AuthenticatedAiAssistantRoute
+  '/banking': typeof AuthenticatedBankingRoute
+  '/contacts': typeof AuthenticatedContactsRoute
+  '/help': typeof AuthenticatedHelpRoute
+  '/products-services': typeof AuthenticatedProductsServicesRoute
+  '/purchases': typeof AuthenticatedPurchasesRoute
+  '/reports': typeof AuthenticatedReportsRoute
+  '/sales': typeof AuthenticatedSalesRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/accounting': typeof AccountingRoute
-  '/ai-assistant': typeof AiAssistantRoute
-  '/banking': typeof BankingRoute
-  '/contacts': typeof ContactsRoute
-  '/help': typeof HelpRoute
-  '/products-services': typeof ProductsServicesRoute
-  '/purchases': typeof PurchasesRoute
-  '/reports': typeof ReportsRoute
-  '/sales': typeof SalesRoute
-  '/settings': typeof SettingsRoute
+  '/_authenticated/accounting': typeof AuthenticatedAccountingRoute
+  '/_authenticated/ai-assistant': typeof AuthenticatedAiAssistantRoute
+  '/_authenticated/banking': typeof AuthenticatedBankingRoute
+  '/_authenticated/contacts': typeof AuthenticatedContactsRoute
+  '/_authenticated/help': typeof AuthenticatedHelpRoute
+  '/_authenticated/products-services': typeof AuthenticatedProductsServicesRoute
+  '/_authenticated/purchases': typeof AuthenticatedPurchasesRoute
+  '/_authenticated/reports': typeof AuthenticatedReportsRoute
+  '/_authenticated/sales': typeof AuthenticatedSalesRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/accounting'
     | '/ai-assistant'
     | '/banking'
@@ -131,9 +132,9 @@ export interface FileRouteTypes {
     | '/reports'
     | '/sales'
     | '/settings'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/accounting'
     | '/ai-assistant'
     | '/banking'
@@ -144,129 +145,130 @@ export interface FileRouteTypes {
     | '/reports'
     | '/sales'
     | '/settings'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/accounting'
-    | '/ai-assistant'
-    | '/banking'
-    | '/contacts'
-    | '/help'
-    | '/products-services'
-    | '/purchases'
-    | '/reports'
-    | '/sales'
-    | '/settings'
+    | '/_authenticated/accounting'
+    | '/_authenticated/ai-assistant'
+    | '/_authenticated/banking'
+    | '/_authenticated/contacts'
+    | '/_authenticated/help'
+    | '/_authenticated/products-services'
+    | '/_authenticated/purchases'
+    | '/_authenticated/reports'
+    | '/_authenticated/sales'
+    | '/_authenticated/settings'
+    | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AccountingRoute: typeof AccountingRoute
-  AiAssistantRoute: typeof AiAssistantRoute
-  BankingRoute: typeof BankingRoute
-  ContactsRoute: typeof ContactsRoute
-  HelpRoute: typeof HelpRoute
-  ProductsServicesRoute: typeof ProductsServicesRoute
-  PurchasesRoute: typeof PurchasesRoute
-  ReportsRoute: typeof ReportsRoute
-  SalesRoute: typeof SalesRoute
-  SettingsRoute: typeof SettingsRoute
+  AuthenticatedAccountingRoute: typeof AuthenticatedAccountingRoute
+  AuthenticatedAiAssistantRoute: typeof AuthenticatedAiAssistantRoute
+  AuthenticatedBankingRoute: typeof AuthenticatedBankingRoute
+  AuthenticatedContactsRoute: typeof AuthenticatedContactsRoute
+  AuthenticatedHelpRoute: typeof AuthenticatedHelpRoute
+  AuthenticatedProductsServicesRoute: typeof AuthenticatedProductsServicesRoute
+  AuthenticatedPurchasesRoute: typeof AuthenticatedPurchasesRoute
+  AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
+  AuthenticatedSalesRoute: typeof AuthenticatedSalesRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/accounting': {
-      id: '/accounting'
+    '/_authenticated/accounting': {
+      id: '/_authenticated/accounting'
       path: '/accounting'
       fullPath: '/accounting'
-      preLoaderRoute: typeof AccountingRouteImport
+      preLoaderRoute: typeof AuthenticatedAccountingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ai-assistant': {
-      id: '/ai-assistant'
+    '/_authenticated/ai-assistant': {
+      id: '/_authenticated/ai-assistant'
       path: '/ai-assistant'
       fullPath: '/ai-assistant'
-      preLoaderRoute: typeof AiAssistantRouteImport
+      preLoaderRoute: typeof AuthenticatedAiAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/banking': {
-      id: '/banking'
+    '/_authenticated/banking': {
+      id: '/_authenticated/banking'
       path: '/banking'
       fullPath: '/banking'
-      preLoaderRoute: typeof BankingRouteImport
+      preLoaderRoute: typeof AuthenticatedBankingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contacts': {
-      id: '/contacts'
+    '/_authenticated/contacts': {
+      id: '/_authenticated/contacts'
       path: '/contacts'
       fullPath: '/contacts'
-      preLoaderRoute: typeof ContactsRouteImport
+      preLoaderRoute: typeof AuthenticatedContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/help': {
-      id: '/help'
+    '/_authenticated/help': {
+      id: '/_authenticated/help'
       path: '/help'
       fullPath: '/help'
-      preLoaderRoute: typeof HelpRouteImport
+      preLoaderRoute: typeof AuthenticatedHelpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products-services': {
-      id: '/products-services'
+    '/_authenticated/products-services': {
+      id: '/_authenticated/products-services'
       path: '/products-services'
       fullPath: '/products-services'
-      preLoaderRoute: typeof ProductsServicesRouteImport
+      preLoaderRoute: typeof AuthenticatedProductsServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/purchases': {
-      id: '/purchases'
+    '/_authenticated/purchases': {
+      id: '/_authenticated/purchases'
       path: '/purchases'
       fullPath: '/purchases'
-      preLoaderRoute: typeof PurchasesRouteImport
+      preLoaderRoute: typeof AuthenticatedPurchasesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/reports': {
-      id: '/reports'
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
       path: '/reports'
       fullPath: '/reports'
-      preLoaderRoute: typeof ReportsRouteImport
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sales': {
-      id: '/sales'
+    '/_authenticated/sales': {
+      id: '/_authenticated/sales'
       path: '/sales'
       fullPath: '/sales'
-      preLoaderRoute: typeof SalesRouteImport
+      preLoaderRoute: typeof AuthenticatedSalesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings': {
-      id: '/settings'
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AccountingRoute: AccountingRoute,
-  AiAssistantRoute: AiAssistantRoute,
-  BankingRoute: BankingRoute,
-  ContactsRoute: ContactsRoute,
-  HelpRoute: HelpRoute,
-  ProductsServicesRoute: ProductsServicesRoute,
-  PurchasesRoute: PurchasesRoute,
-  ReportsRoute: ReportsRoute,
-  SalesRoute: SalesRoute,
-  SettingsRoute: SettingsRoute,
+  AuthenticatedAccountingRoute: AuthenticatedAccountingRoute,
+  AuthenticatedAiAssistantRoute: AuthenticatedAiAssistantRoute,
+  AuthenticatedBankingRoute: AuthenticatedBankingRoute,
+  AuthenticatedContactsRoute: AuthenticatedContactsRoute,
+  AuthenticatedHelpRoute: AuthenticatedHelpRoute,
+  AuthenticatedProductsServicesRoute: AuthenticatedProductsServicesRoute,
+  AuthenticatedPurchasesRoute: AuthenticatedPurchasesRoute,
+  AuthenticatedReportsRoute: AuthenticatedReportsRoute,
+  AuthenticatedSalesRoute: AuthenticatedSalesRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
