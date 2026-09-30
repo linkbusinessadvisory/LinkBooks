@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 import { PageHeader } from "@/components/common/states";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: () => ({
     meta: [
       { title: "Reports — LinkBooks" },

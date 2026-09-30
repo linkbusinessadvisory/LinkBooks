@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export const Route = createFileRoute("/banking")({
+export const Route = createFileRoute("/_authenticated/banking")({
   head: () => ({
     meta: [
       { title: "Banking — LinkBooks" },
