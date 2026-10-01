@@ -20,6 +20,7 @@ import { Route as AuthenticatedBankingRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedContactsRouteImport } from './routes/_authenticated/contacts'
 import { Route as AuthenticatedHelpRouteImport } from './routes/_authenticated/help'
 import { Route as AuthenticatedProductsServicesRouteImport } from './routes/_authenticated/products-services'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedPurchasesRouteImport } from './routes/_authenticated/purchases'
 import { Route as AuthenticatedReportsRouteImport } from './routes/_authenticated/reports'
 import { Route as AuthenticatedSalesRouteImport } from './routes/_authenticated/sales'
@@ -81,6 +82,11 @@ const AuthenticatedProductsServicesRoute =
     path: '/products-services',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPurchasesRoute = AuthenticatedPurchasesRouteImport.update({
   id: '/purchases',
   path: '/purchases',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/contacts': typeof AuthenticatedContactsRoute
   '/help': typeof AuthenticatedHelpRoute
   '/products-services': typeof AuthenticatedProductsServicesRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/sales': typeof AuthenticatedSalesRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/contacts': typeof AuthenticatedContactsRoute
   '/help': typeof AuthenticatedHelpRoute
   '/products-services': typeof AuthenticatedProductsServicesRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/purchases': typeof AuthenticatedPurchasesRoute
   '/reports': typeof AuthenticatedReportsRoute
   '/sales': typeof AuthenticatedSalesRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/_authenticated/contacts': typeof AuthenticatedContactsRoute
   '/_authenticated/help': typeof AuthenticatedHelpRoute
   '/_authenticated/products-services': typeof AuthenticatedProductsServicesRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/purchases': typeof AuthenticatedPurchasesRoute
   '/_authenticated/reports': typeof AuthenticatedReportsRoute
   '/_authenticated/sales': typeof AuthenticatedSalesRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/contacts'
     | '/help'
     | '/products-services'
+    | '/profile'
     | '/purchases'
     | '/reports'
     | '/sales'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/contacts'
     | '/help'
     | '/products-services'
+    | '/profile'
     | '/purchases'
     | '/reports'
     | '/sales'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/_authenticated/contacts'
     | '/_authenticated/help'
     | '/_authenticated/products-services'
+    | '/_authenticated/profile'
     | '/_authenticated/purchases'
     | '/_authenticated/reports'
     | '/_authenticated/sales'
@@ -290,6 +302,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProductsServicesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/purchases': {
       id: '/_authenticated/purchases'
       path: '/purchases'
@@ -328,6 +347,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedContactsRoute: typeof AuthenticatedContactsRoute
   AuthenticatedHelpRoute: typeof AuthenticatedHelpRoute
   AuthenticatedProductsServicesRoute: typeof AuthenticatedProductsServicesRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedPurchasesRoute: typeof AuthenticatedPurchasesRoute
   AuthenticatedReportsRoute: typeof AuthenticatedReportsRoute
   AuthenticatedSalesRoute: typeof AuthenticatedSalesRoute
@@ -342,6 +362,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedContactsRoute: AuthenticatedContactsRoute,
   AuthenticatedHelpRoute: AuthenticatedHelpRoute,
   AuthenticatedProductsServicesRoute: AuthenticatedProductsServicesRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedPurchasesRoute: AuthenticatedPurchasesRoute,
   AuthenticatedReportsRoute: AuthenticatedReportsRoute,
   AuthenticatedSalesRoute: AuthenticatedSalesRoute,
