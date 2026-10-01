@@ -1,34 +1,41 @@
-// Auto-injected by the Supabase integration when this file does not exist.
-//
-// Pathless layout route that gates every child under `src/routes/_authenticated/`
-// behind a signed-in Supabase user. The subtree is client-rendered (`ssr: false`)
-// because Supabase stores the session in `localStorage`, which the server cannot
-// read. Trying to gate this subtree server-side produces redirect loops or
-// false sign-out flashes on hard refresh.
-//
-// Public pages and `/auth` continue to SSR normally — they do not import this
-// layout and are not affected.
-//
-// Data fetching inside this subtree should call `createServerFn`s protected by
-// `requireSupabaseAuth`. The browser attaches the bearer token automatically
-// via `attachSupabaseAuth`, which is registered as `functionMiddleware` in
-// `src/start.ts` (auto-wired by the integration).
-//
-// Edit freely. This file is only re-injected when deleted entirely.
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
-import { supabase } from '@/integrations/supabase/client'
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { AppShell } from "@/components/layout/AppShell";
 
-// Lovable's Supabase auth scaffolds use `/auth`; change this if the app uses another sign-in route.
-const SIGN_IN_ROUTE = '/auth'
-
-export const Route = createFileRoute('/_authenticated')({
+/**
+ * Every LinkBooks application page lives under this gate. The session lives in
+ * browser storage, so this subtree opts out of server rendering and checks the
+ * session on the client before any child route renders.
+ *
+ * This gate is the user-experience layer only — data access is enforced
+ * server-side by `requireSupabaseAuth` and database row-level security.
+ */
+export const Route = createFileRoute("/_authenticated")({
   ssr: false,
-  beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser()
+  beforeLoad: async ({ location }) => {
+    const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) {
-      throw redirect({ to: SIGN_IN_ROUTE })
+      throw redirect({
+        to: "/auth",
+        search: { redirect: location.href, mode: "signin" as const },
+      });
     }
-    return { user: data.user }
+    return { user: data.user };
   },
-  component: () => <Outlet />,
-})
+  pendingComponent: () => (
+    <div className="grid min-h-screen place-items-center bg-background">
+      <Loader2 className="size-6 animate-spin text-muted-foreground" />
+      <span className="sr-only">Loading LinkBooks</span>
+    </div>
+  ),
+  component: AuthenticatedLayout,
+});
+
+function AuthenticatedLayout() {
+  return (
+    <AppShell>
+      <Outlet />
+    </AppShell>
+  );
+}
