@@ -29,7 +29,7 @@ function UserMenu() {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/auth", search: { mode: "signin", redirect: undefined }, replace: true });
+    navigate({ to: "/auth", replace: true });
   }
 
   return (

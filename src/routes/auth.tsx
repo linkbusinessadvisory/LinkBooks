@@ -17,9 +17,11 @@ import {
 } from "@/lib/auth-helpers";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { redirect?: string | undefined; mode?: "signin" | "signup" | undefined } => ({
     redirect: typeof search['redirect'] === "string" ? (search['redirect'] as string) : undefined,
-    mode: search['mode'] === "signup" ? ("signup" as const) : ("signin" as const),
+    mode: search['mode'] === "signup" ? "signup" : undefined,
   }),
   head: () => ({
     meta: [
@@ -46,7 +48,7 @@ function AuthPage() {
   const router = useRouter();
   const destination = safeRedirect(search.redirect);
 
-  const [tab, setTab] = useState<"signin" | "signup">(search.mode);
+  const [tab, setTab] = useState<"signin" | "signup">(search.mode ?? "signin");
   const [checking, setChecking] = useState(true);
 
   // Already signed in? Don't show the form.
