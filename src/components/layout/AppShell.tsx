@@ -1,8 +1,11 @@
 import { useState, type ReactNode } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Search, Bell, Plus, ChevronDown } from "lucide-react";
+import { Link, useNavigate, useRouteContext, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { Menu, Search, Bell, Plus, ChevronDown, LogOut, UserRound } from "lucide-react";
 import { navItems } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import { initialsFrom } from "@/lib/auth-helpers";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -15,6 +18,51 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+
+function UserMenu() {
+  const { user } = useRouteContext({ from: "/_authenticated" });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const fullName = (user.user_metadata?.["full_name"] as string | undefined) ?? "";
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          aria-label="Account menu"
+          className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground outline-none ring-ring focus-visible:ring-2"
+        >
+          {initialsFrom(fullName, user.email)}
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-60">
+        <DropdownMenuLabel className="font-normal">
+          <div className="truncate text-sm font-medium">{fullName || "Your account"}</div>
+          <div className="truncate text-xs text-muted-foreground">{user.email}</div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <UserRound className="size-4" />
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleSignOut}>
+          <LogOut className="size-4" />
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 function Brand() {
   return (
@@ -131,9 +179,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <span className="absolute right-2 top-2 size-2 rounded-full bg-accent" />
           </Button>
 
-          <div className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground">
-            GK
-          </div>
+          <UserMenu />
         </header>
 
         <div className="border-b border-border bg-muted/40 px-4 py-2 md:px-6">

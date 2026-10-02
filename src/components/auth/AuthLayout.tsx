@@ -7,7 +7,7 @@ export function AuthLayout({
   footer,
 }: {
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   children: ReactNode;
   footer?: ReactNode;
 }) {
