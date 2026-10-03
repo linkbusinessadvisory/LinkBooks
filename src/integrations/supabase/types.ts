@@ -268,6 +268,7 @@ export type Database = {
         Returns: boolean
       }
       is_company_member: { Args: { _company_id: string }; Returns: boolean }
+      shares_company_with: { Args: { _other: string }; Returns: boolean }
     }
     Enums: {
       company_role:
