@@ -82,7 +82,7 @@ export function showRecoveryStatus(variant: RecoveryVariant) {
     document.body.appendChild(overlay);
   }
 
-  overlay.dataset.lbHidden = "0";
+  overlay.dataset["lbHidden"] = "0";
   const copy = COPY[variant];
   const title = overlay.querySelector("[data-lb-recovery-title]");
   const body = overlay.querySelector("[data-lb-recovery-body]");
@@ -93,11 +93,11 @@ export function showRecoveryStatus(variant: RecoveryVariant) {
 export function hideRecoveryStatus() {
   if (typeof document === "undefined") return;
   const overlay = document.getElementById(OVERLAY_ID);
-  if (!overlay || overlay.dataset.lbHidden === "1") return;
-  overlay.dataset.lbHidden = "1";
+  if (!overlay || overlay.dataset["lbHidden"] === "1") return;
+  overlay.dataset["lbHidden"] = "1";
   // Only remove if nothing re-claimed the overlay in the meantime.
   window.setTimeout(() => {
-    if (overlay?.dataset.lbHidden === "1") overlay.remove();
+    if (overlay?.dataset["lbHidden"] === "1") overlay.remove();
   }, 220);
 }
 
