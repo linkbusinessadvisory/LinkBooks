@@ -11,3 +11,4 @@
 
 - Auth: all app pages live under `src/routes/_authenticated/` (client-only session gate, redirects to `/auth?redirect=`); public auth pages are `/auth`, `/forgot-password`, `/reset-password`. Why: the gate is UX only — data access is enforced by `requireSupabaseAuth` server functions plus row-level security.
 - Future sign-in providers are registered in `src/lib/auth-helpers.ts` `authProviders`; only enabled ones render. Why: no fake provider buttons until configured.
+- Stale-asset recovery (auto-reload after a replaced build, plus the status shown across it) lives in `src/lib/recovery.tsx`; the root error component and the `vite:preloadError` listener must both route through it. Why: one owner keeps the reload once-only and stops the status being left on screen.

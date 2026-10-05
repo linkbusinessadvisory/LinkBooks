@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -14,6 +16,12 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  hideRecoveryStatus,
+  isStaleChunkError,
+  reloadOnceForStaleChunk,
+  useRecoveryStatus,
+} from "@/lib/recovery";
 
 function NotFoundComponent() {
   return (
@@ -38,24 +46,13 @@ function NotFoundComponent() {
 }
 
 // After a new deploy, an open tab may request page files that no longer exist.
-// Reload once to fetch the fresh version instead of showing a blank screen.
-function isStaleChunkError(error: unknown) {
-  const msg = error instanceof Error ? error.message : String(error ?? "");
-  return /Failed to fetch dynamically imported module|Importing a module script failed|error loading dynamically imported module/i.test(msg);
-}
-function reloadOnceForStaleChunk() {
-  const key = "lb-chunk-reload";
-  const last = Number(sessionStorage.getItem(key) ?? 0);
-  if (Date.now() - last < 10_000) return false;
-  sessionStorage.setItem(key, String(Date.now()));
-  window.location.reload();
-  return true;
-}
-
+// Reload once to fetch the fresh version instead of showing a blank screen;
+// the recovery status tells the user the app is fixing itself.
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    hideRecoveryStatus();
     if (isStaleChunkError(error) && reloadOnceForStaleChunk()) return;
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -143,6 +140,9 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+
+  // Hold the recovery status up after an automatic stale-asset reload.
+  useRecoveryStatus();
 
   // Single app-wide auth listener: re-run route guards on identity changes.
   useEffect(() => {
