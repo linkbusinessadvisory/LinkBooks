@@ -31,15 +31,6 @@ export const Route = createFileRoute("/_authenticated/accounting")({
   component: Accounting,
 });
 
-const coa = [
-  { code: "1000", name: "Business Current Account", type: "Asset" },
-  { code: "1100", name: "Accounts Receivable", type: "Asset" },
-  { code: "2100", name: "Accounts Payable", type: "Liability" },
-  { code: "3000", name: "Owner's Equity", type: "Equity" },
-  { code: "4000", name: "Sales", type: "Income" },
-  { code: "5000", name: "Cost of Sales", type: "Expense" },
-];
-
 function Accounting() {
   return (
     <>
@@ -53,7 +44,7 @@ function Accounting() {
         <AlertTitle>Engine not yet enabled</AlertTitle>
         <AlertDescription>
           Double-entry posting, period locking and the trial balance are implemented in a later
-          phase. Nothing shown here affects real records.
+          phase. No accounts or entries exist for any company yet.
         </AlertDescription>
       </Alert>
 
@@ -66,28 +57,10 @@ function Accounting() {
         </TabsList>
 
         <TabsContent value="coa" className="mt-4">
-          <Card>
-            <CardContent className="pt-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Code</TableHead>
-                    <TableHead>Account</TableHead>
-                    <TableHead className="text-right">Type</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {coa.map((a) => (
-                    <TableRow key={a.code}>
-                      <TableCell className="numeric font-medium">{a.code}</TableCell>
-                      <TableCell>{a.name}</TableCell>
-                      <TableCell className="text-right text-muted-foreground">{a.type}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+          <CompanyEmptyState
+            title="No chart of accounts"
+            description="The company's accounts will be listed here once the ledger is set up."
+          />
         </TabsContent>
 
         <TabsContent value="journals" className="mt-4">
@@ -99,7 +72,10 @@ function Accounting() {
         </TabsContent>
 
         <TabsContent value="ledger" className="mt-4">
-          <LoadingState />
+          <CompanyEmptyState
+            title="No ledger entries"
+            description="Every posted journal line will appear here by account."
+          />
         </TabsContent>
 
         <TabsContent value="periods" className="mt-4">
