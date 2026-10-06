@@ -1,17 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/states";
-import { StatCard, StatusBadge } from "@/components/common/stat-card";
+import { StatCard } from "@/components/common/stat-card";
+import { CompanyEmptyState, NO_FIGURE } from "@/components/common/company-empty";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 export const Route = createFileRoute("/_authenticated/sales")({
   head: () => ({
@@ -31,37 +24,6 @@ export const Route = createFileRoute("/_authenticated/sales")({
   component: Sales,
 });
 
-const invoices = [
-  {
-    ref: "INV-1042",
-    customer: "Harbour Design Ltd",
-    due: "12 Oct 2026",
-    amount: "4,250.00",
-    status: "Awaiting payment" as const,
-  },
-  {
-    ref: "INV-1041",
-    customer: "Stonebridge Media",
-    due: "30 Sep 2026",
-    amount: "1,180.00",
-    status: "Paid" as const,
-  },
-  {
-    ref: "INV-1039",
-    customer: "Alder & Finch",
-    due: "05 Sep 2026",
-    amount: "2,410.00",
-    status: "Overdue" as const,
-  },
-  {
-    ref: "INV-1043",
-    customer: "Kestrel Analytics",
-    due: "—",
-    amount: "9,600.00",
-    status: "Draft" as const,
-  },
-];
-
 function Sales() {
   return (
     <>
@@ -79,9 +41,9 @@ function Sales() {
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Draft" value="1" hint="Not yet posted" />
-        <StatCard label="Awaiting payment" value="4,250.00" tone="warning" />
-        <StatCard label="Overdue" value="2,410.00" tone="negative" hint="1 invoice" />
+        <StatCard label="Draft" value={NO_FIGURE} hint="No invoices" />
+        <StatCard label="Awaiting payment" value={NO_FIGURE} hint="No invoices" />
+        <StatCard label="Overdue" value={NO_FIGURE} hint="No invoices" />
       </div>
 
       <Tabs defaultValue="invoices" className="mt-6">
@@ -91,36 +53,11 @@ function Sales() {
           <TabsTrigger value="credit-notes">Credit notes</TabsTrigger>
         </TabsList>
         <TabsContent value="invoices" className="mt-4">
-          <Card>
-            <CardContent className="pt-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Invoice</TableHead>
-                    <TableHead>Customer</TableHead>
-                    <TableHead className="hidden sm:table-cell">Due</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Total</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {invoices.map((r) => (
-                    <TableRow key={r.ref}>
-                      <TableCell className="font-medium">{r.ref}</TableCell>
-                      <TableCell className="text-muted-foreground">{r.customer}</TableCell>
-                      <TableCell className="hidden text-muted-foreground sm:table-cell">
-                        {r.due}
-                      </TableCell>
-                      <TableCell>
-                        <StatusBadge status={r.status} />
-                      </TableCell>
-                      <TableCell className="numeric text-right">{r.amount}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+          <CompanyEmptyState
+            title="No invoices"
+            description="Customer invoices will be listed here once created."
+            actionLabel="New invoice"
+          />
         </TabsContent>
         <TabsContent value="payments" className="mt-4">
           <Card>
