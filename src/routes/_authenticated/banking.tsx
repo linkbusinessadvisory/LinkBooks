@@ -24,12 +24,6 @@ export const Route = createFileRoute("/_authenticated/banking")({
   component: Banking,
 });
 
-const accounts = [
-  { name: "Business Current", number: "•••• 4821", balance: "61,204.10", unreconciled: 12 },
-  { name: "Savings Reserve", number: "•••• 7730", balance: "18,000.00", unreconciled: 0 },
-  { name: "Card — Operations", number: "•••• 1192", balance: "3,211.10", unreconciled: 15 },
-];
-
 function Banking() {
   return (
     <>
@@ -39,17 +33,12 @@ function Banking() {
         actions={<Button size="sm">Add bank account</Button>}
       />
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {accounts.map((a) => (
-          <StatCard
-            key={a.name}
-            label={a.name}
-            value={a.balance}
-            hint={`${a.number} · ${a.unreconciled} unreconciled`}
-            icon={Landmark}
-          />
-        ))}
-      </div>
+      <CompanyEmptyState
+        icon={Landmark}
+        title="No bank accounts"
+        description="Bank accounts and their ledger balances will appear here once added."
+        actionLabel="Add bank account"
+      />
 
       <Tabs defaultValue="reconcile" className="mt-6">
         <TabsList>
